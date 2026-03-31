@@ -1,0 +1,51 @@
+notes
+
+
+
+
+example
+{
+  coord: { lon: 73.8553, lat: 18.5196 },
+  weather: [
+    {
+      id: 804,
+      main: "Clouds",
+      description: "overcast clouds",
+      icon: "04n"
+    }
+  ],
+  base: "stations",
+  main: {
+    temp: 302.12,
+    feels_like: 301.4,
+    temp_min: 301.15,
+    temp_max: 302.12,
+    pressure: 1009,
+    humidity: 36,
+    sea_level: 1009,
+    grnd_level: 937
+  },
+  visibility: 10000,
+  wind: { speed: 5.41, deg: 234, gust: 5.77 },
+  clouds: { all: 100 },
+  dt: 1774966546,
+  sys: {
+    type: 2,
+    id: 2107474,
+    country: "IN",
+    sunrise: 1774918786,
+    sunset: 1774963059
+  },
+  timezone: 19800,
+  id: 1259229,
+  name: "Pune",
+  cod: 200
+}
+
+Quick meaning:
+- coord = city coordinates
+- weather = condition details and icon code
+- main = temperature, pressure, humidity
+- wind = wind speed and direction
+- sys = country and sunrise/sunset
+- name = city name
