@@ -1,76 +1,56 @@
-#  Smart City Weather Dashboard
+# Smart City Weather Dashboard
 
-##  Project Overview
-The Smart City Weather Dashboard is a simple web application that displays real-time weather information for any city using a public API.
-It also provides basic suggestions like **"What to Wear"** based on weather conditions.
+A React-based weather dashboard that shows real-time weather data for any city and provides smart "What to Wear" suggestions based on conditions.
 
-This project is built to practice JavaScript, API integration, and UI development.
+## Live Demo
 
----
+- Netlify: https://soft-jalebi-eea977.netlify.app/
 
-##  Objective
-- Fetch data from an API using JavaScript
-- Display dynamic data on a webpage
-- Build a clean and responsive UI
+## Project Overview
 
----
+This app fetches weather information from OpenWeatherMap and presents:
+- current temperature and humidity
+- weather condition details
+- forecast cards
+- outfit/advice suggestions (for example, carry an umbrella when rain chances are high)
 
-##  API Used
-**OpenWeatherMap API**
-https://openweathermap.org/api
+## Features
 
-Used to fetch:
-- Current weather data
-- Temperature
-- Humidity
-- Weather condition
+- Search weather by city name
+- View current weather information
+- See forecast cards in a clean grid layout
+- Get practical "What to Wear" suggestions
+- Responsive and modern UI
 
----
+## Tech Stack
 
-##  Features
-
-###  Search by City
-- Users can search weather by city name.
-
-###  Weather Information
-- Temperature
-- Humidity
-- Weather condition
-
-###  “What to Wear” Suggestion
-- Rain → Carry an umbrella
-- Cold → Wear warm clothes
-- Hot → Wear light clothes
-
-###  UI Design
-- Simple and clean layout
-- Basic responsive design
-
----
-
-##  Core Functionalities
-
-###  Searching
-- Search weather by city
-
-###  Data Handling
-- Use JavaScript to fetch, handle, and display API data
-
----
-
-##  Technologies Used
-- HTML
+- React
+- JavaScript (ES6+)
 - CSS
-- JavaScript
-- Fetch API
+- Vite
+- OpenWeatherMap API
 
----
+## API
 
-##  Project Structure
-Current repository structure:
+- OpenWeatherMap: https://openweathermap.org/api
+
+## Project Structure
 
 ```bash
 Smart-City-Weather-Dashboard/
-└── README.md
+├── README.md
+└── weather-Dasboard /
+    ├── src/
+    ├── dist/
+    ├── package.json
+    └── vite.config.js
+```
+
+## Getting Started
+
+```bash
+cd "weather-Dasboard "
+npm install
+npm run dev
 ```
 
