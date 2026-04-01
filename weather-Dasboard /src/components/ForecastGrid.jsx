@@ -8,10 +8,10 @@ export default function ForecastGrid({ forecast }) {
         {forecast.map((day) => (
           <div className="forecast-card" key={day.dt}>
             <p className="day">{day.dayName}</p>
-            <img
+            {/* <img
               src={getWeatherImage(day.weatherMain)}
               alt="weather"
-            />
+            /> */}
             <p className="f-temp">{day.temp}°C</p>
           </div>
         ))}
