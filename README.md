@@ -2,9 +2,6 @@
 
 A React-based weather dashboard that shows real-time weather data for any city and provides smart "What to Wear" suggestions based on conditions.
 
-## Live Demo
-
-- Netlify: https://soft-jalebi-eea977.netlify.app/
 
 ## Project Overview
 
