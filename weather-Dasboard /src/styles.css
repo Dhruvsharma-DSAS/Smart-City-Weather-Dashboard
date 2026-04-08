@@ -33,10 +33,15 @@ body.light {
   color: var(--text-light);
 }
 
-/* Weather Specific Backgrounds */
+/* Weather Specific Backgrounds - Adaptive */
 body.cold { background: linear-gradient(135deg, #00d2ff, #3a7bd5); }
 body.moderate { background: linear-gradient(135deg, #11998e, #38ef7d); }
 body.hot { background: linear-gradient(135deg, #f12711, #f5af19); }
+
+/* Dark Mode Overrides for Weather Backgrounds */
+body.dark.cold { background: linear-gradient(135deg, #0f172a, #1e3a8a); }
+body.dark.moderate { background: linear-gradient(135deg, #0f172a, #065f46); }
+body.dark.hot { background: linear-gradient(135deg, #0f172a, #991b1b); }
 
 .container {
   max-width: 900px;
