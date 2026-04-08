@@ -1,17 +1,17 @@
 import { getWeatherImage } from "../data/weatherImageMap";
 
-export default function ForecastGrid({ forecast }) {
+export default function ForecastGrid({ days }) {
   return (
     <div className="forecast-section">
-      <h3>5-Day Forecast</h3>
+      <h3>Next 5 Days</h3>
       <div className="forecast-grid">
-        {forecast.map((day) => (
+        {days.map((day) => (
           <div className="forecast-card" key={day.dt}>
             <p className="day">{day.dayName}</p>
-            {/* <img
+            <img
               src={getWeatherImage(day.weatherMain)}
-              alt="weather"
-            /> */}
+              alt="weathericon"
+            />
             <p className="f-temp">{day.temp}°C</p>
           </div>
         ))}
@@ -19,3 +19,4 @@ export default function ForecastGrid({ forecast }) {
     </div>
   );
 }
+

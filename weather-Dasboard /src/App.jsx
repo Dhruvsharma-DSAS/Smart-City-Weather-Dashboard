@@ -7,10 +7,7 @@ import ForecastGrid from "./components/ForecastGrid";
 import { getWearSuggestions } from "./data/wearSuggestions";
 import { fetchWeatherByCity } from "./services/weatherApi";
 
-
-
-
-function mapCurrentWeather(data) {
+function mapWeather(data) {
   return {
     temp: Math.round(data.main.temp),
     city: data.name,
@@ -42,65 +39,81 @@ export default function App() {
   const [cityInput, setCityInput] = useState("");
   const [currentWeather, setCurrentWeather] = useState(null);
   const [forecast, setForecast] = useState([]);
+  const [isDark, setIsDark] = useState(true);
+  const [history, setHistory] = useState([]);
 
   useEffect(() => {
-    if (!currentWeather) {
-      document.body.className = "";
-      return;
+    const root = document.body;
+    root.className = isDark ? "dark" : "light";
+    
+    if (currentWeather) {
+      if (currentWeather.temp < 15) root.classList.add("cold");
+      else if (currentWeather.temp > 30) root.classList.add("hot");
+      else root.classList.add("moderate");
     }
-
-    if (currentWeather.temp < 15) {
-      document.body.className = "cold";
-    } else if (currentWeather.temp > 30) {
-      document.body.className = "hot";
-    } else {
-      document.body.className = "moderate";
-    }
-  }, [currentWeather]);
+  }, [currentWeather, isDark]);
 
   async function loadCityWeather(city) {
-    const trimmed = city.trim();
-    if (!trimmed) return;
+    const q = city.trim();
+    if (!q) return;
 
     try {
-      const result = await fetchWeatherByCity(trimmed);
-      setCurrentWeather(mapCurrentWeather(result.current));
-      setForecast(mapForecast(result.forecast));
-      localStorage.setItem("lastCity", trimmed);
+      const { current, forecast: foreData } = await fetchWeatherByCity(q);
+      setCurrentWeather(mapWeather(current));
+      setForecast(mapForecast(foreData));
+      
+      // Update history using HOFs
+      setHistory(prev => {
+        const filtered = prev.filter(item => item !== q);
+        return [q, ...filtered].slice(0, 5);
+      });
+
+      localStorage.setItem("lastCity", q);
     } catch (err) {
-      console.log(err.message || "Something went wrong!");
+      alert("City not found! Try something else.");
     }
   }
 
   useEffect(() => {
-    const savedCity = localStorage.getItem("lastCity");
-    if (savedCity) {
-      setCityInput(savedCity);
-      loadCityWeather(savedCity);
+    const saved = localStorage.getItem("lastCity");
+    if (saved) {
+      setCityInput(saved);
+      loadCityWeather(saved);
     }
   }, []);
 
-  const wearTips = currentWeather
+  const tips = currentWeather
     ? getWearSuggestions(currentWeather.temp, currentWeather.description)
     : [];
 
   return (
     <div className="container">
-      <Header />
+      <Header isDark={isDark} onToggleTheme={() => setIsDark(!isDark)} />
 
       <SearchBar
-        cityInput={cityInput}
-        onCityInputChange={setCityInput}
+        val={cityInput}
+        onChange={setCityInput}
         onSearch={() => loadCityWeather(cityInput)}
       />
 
+      {history.length > 0 && (
+        <div className="history-chips">
+          {history.map(city => (
+            <button key={city} onClick={() => { setCityInput(city); loadCityWeather(city); }}>
+              {city}
+            </button>
+          ))}
+        </div>
+      )}
+
       {currentWeather && (
-        <>
-          <CurrentWeatherCard currentWeather={currentWeather} />
-          <WearSuggestions tips={wearTips} />
-          <ForecastGrid forecast={forecast} />
-        </>
+        <div className="fade-in">
+          <CurrentWeatherCard weather={currentWeather} />
+          <WearSuggestions tips={tips} />
+          <ForecastGrid days={forecast} />
+        </div>
       )}
     </div>
   );
 }
+
